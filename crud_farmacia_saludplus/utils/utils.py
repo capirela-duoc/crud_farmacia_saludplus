@@ -17,16 +17,46 @@ def validar_entero_mayor_cero(num):
         return num
     
 def leer_menu(opMenu, menuLen):
-    try:
-        if opMenu is None or (opMenu < 1 or opMenu > menuLen):
-            return None
-        else:
-            return opMenu
-    except ValueError as error:
-        print(f"Ha ocurri un error al valdiar la opción del menú: {error}")
-        
-def mostrar_menu(opciones_menu):
-    if not opciones_menu or len(opciones_menu) == 0:
+    if opMenu is None or (opMenu < 1 or opMenu > len(menuLen)):
         return None
     else:
-        for
+        return opMenu
+        
+def mostrar_menu(opciones_menu):
+    print('')
+    print('------MENU-----')
+    for indice, op_menu in enumerate(opciones_menu):
+        print(f'{indice+1}. {op_menu}')
+    print('')
+
+def validar_opcion(op):
+    if not op:
+        return None
+    elif op.upper() == "S":
+        return True
+    else:
+        return False
+    
+def crear_codigo(diccionario):
+    if not diccionario or len(diccionario) == 0:
+        return None
+    else:
+        diccionario_len = len(diccionario.items())+1
+        
+        codigo = f"MD{diccionario_len:03d}"
+        
+        buscar_codigo = buscar_por_codigo(codigo, diccionario)
+        
+        if not buscar_codigo:
+            return codigo
+        else:
+            return None
+    
+def buscar_por_codigo(codigo, diccionario):
+    if not codigo:
+        return None
+    else:
+        for cdg in diccionario:
+            if cdg == codigo:
+                return True
+        return False
